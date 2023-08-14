@@ -32,12 +32,25 @@ class TransactionController extends Controller
         $rules = [
             'total_price' => 'required|integer',
             'total_cash' => 'required|integer',
-            'total_change' => 'integer'
+            'total_change' => 'integer',
+            'items' => 'required|array|min:1',
+            'items.*.food_id' => 'required|integer|min:1',
+            'items.*.quantity' => 'required|integer|min:1',
+            'items.*.price' => 'required|integer|min:0',
+            'items.*.subtotal' => 'required|integer|min:0',
+        ];
+
+        $customMessages = [
+            'required' => 'Field :attribute harus diisi.',
+            'integer' => 'Field :attribute harus berupa angka.',
+            'min' => 'Field :attribute minimal :min.',
+            'items.min' => 'Minimal satu item harus ditambahkan.',
+            'items.*.min' => 'Field :attribute minimal :min.',
         ];
 
         $data = $request->all();
 
-        $validator = Validator::make($data, $rules);
+        $validator = Validator::make($data, $rules, $customMessages);
 
         //check if validation fails
         if ($validator->fails()) {

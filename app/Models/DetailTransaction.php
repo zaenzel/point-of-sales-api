@@ -11,7 +11,7 @@ class DetailTransaction extends Model
     protected $fillable = [
         'transaction_id',
         'food_id',
-        'amount',
+        'quantity',
         'price',
         'subtotal'
     ];
