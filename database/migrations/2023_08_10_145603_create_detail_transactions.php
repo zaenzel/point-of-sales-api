@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('transaction_id')->constrained('transactions')->onDelete('cascade');
             $table->foreignId('food_id')->constrained('foods');
-            $table->integer('amount')->default(0);
+            $table->integer('quantity')->default(0);
             $table->integer('price')->default(0);
             $table->integer('subtotal')->default(0);
         });
